@@ -1,0 +1,57 @@
+## Test Scenarios for "Generate Test Scenarios from Requirement" Feature
+
+### Positive Test Cases
+1. **Valid Requirement Input**
+    - Input: Well-defined requirement in plain English.
+    - Expected Output: List of relevant test scenarios covering positive, negative, and edge cases.
+
+2. **Requirement with Technical Terms**
+    - Input: Requirement containing domain-specific terminology.
+    - Expected Output: Test scenarios correctly interpret and cover technical terms.
+
+### Negative Test Cases
+3. **Empty Requirement Input**
+    - Input: Blank or whitespace-only requirement.
+    - Expected Output: Error message or prompt to enter a valid requirement.
+
+4. **Malformed Requirement**
+    - Input: Incomplete sentence or gibberish.
+    - Expected Output: Error message or request for clarification.
+
+5. **Unsupported Language**
+    - Input: Requirement in a non-supported language (e.g., French if only English is supported).
+    - Expected Output: Error message indicating unsupported language.
+
+### Edge Cases
+6. **Very Long Requirement**
+    - Input: Requirement with 10,000+ characters.
+    - Expected Output: System processes input without crashing, generates scenarios or warns about input length.
+
+7. **Requirement with Special Characters**
+    - Input: Requirement containing symbols, emojis, or unusual punctuation.
+    - Expected Output: System ignores or handles special characters gracefully.
+
+### Uncommon/Missed Cases
+8. **Ambiguous Requirement**
+    - Input: Requirement with vague or ambiguous wording.
+    - Expected Output: System asks for clarification or generates scenarios for all possible interpretations.
+
+9. **Conflicting Statements**
+    - Input: Requirement with contradictory instructions.
+    - Expected Output: System flags the conflict or generates scenarios for each interpretation.
+
+10. **Requirement with Embedded Code**
+     - Input: Requirement includes code snippets.
+     - Expected Output: System parses and includes code context in test scenarios.
+
+---
+
+## Checklist of Potential Bugs
+- Fails to handle empty or malformed input.
+- Generates incomplete or irrelevant test scenarios.
+- Crashes or hangs on very long requirements.
+- Does not support special characters or non-English input.
+- Misses edge cases or negative scenarios.
+- Does not flag ambiguous or conflicting requirements.
+- Poor performance or slow response for complex requirements.
+- Incorrect parsing of embedded code or technical terms.

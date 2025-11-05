@@ -1,0 +1,361 @@
+Action,Data,Expected Result
+"Authorize in Zenith stage: [Zenith (digitalzenith.io)|https://www.stage.digitalzenith.io/candidates] with your Zenith Account:
+
+Credentials for testing:
+email: [gbr.templates.admin@digitalzenith.io|mailto:gbr.templates.admin@digitalzenith.io]
+password: Odin2024\!
+
+This account should have the UK primary remit and admin role.
+
+And *click the ""Submit"" button.*
+
+!xray-attachment://0d9906f8-b69f-468c-915a-8c16dffcc666|width=442,height=545!",,The user is successfully authenticated.
+"Click on the ""*Admin Centre""* icon.
+
+
+!xray-attachment://36dfeef7-f06f-415c-9047-3073472fcb3c|width=1918,height=947!",,"The Admin Centre page will open.
+On the page will be opened by default the ""Email Template"" tab.
+This tab will be represented in these columns: ""Template Name"", ""File Actions"", ""Recipient"", ""Country"", ""Created by"", and ""Created Date"".
+Near the Created Date will be the *""NEW EMAIL TEMPLATE +""* button.
+On the button of the page will be a pagination of this tab.
+
+!xray-attachment://2d166fca-b216-400a-bf23-51290b29a596|width=1831,height=866!"
+"Click on the *""DOCUMENT TEMPLATES""* tab.
+
+!xray-attachment://a2ef7a80-f4f5-4bc7-9066-87e6bda96dfb|width=1817,height=851!",,"This tab will be represented in these columns: ""Template Name"", ""File Actions"", ""Country"", ""Created by"", and ""Created Date"".
+Near the Created Date will be the *""NEW DOCUMENT TEMPLATE +""* button.
+On the button of the page will be a pagination of this tab.
+
+!xray-attachment://c72e288f-e17f-4d50-a314-74b6d698d9fe|width=1849,height=866!"
+"Click on the button ""*NEW DOCUMENT TEMPLATE +""* 
+
+!xray-attachment://ee845654-13be-45fd-aeb0-d898de066138|width=275,height=94!",,"Upon initiation, the system will navigate to the '*Create New Document Template*' page. By default, the 'Information' tab will be active, displaying General Information, including the following fields:
+
+* Template Name (mandatory)
+* Created by (pre-filled, non-editable)
+* Country (mandatory, it’s a drop-down list where the user can choose from the United Kingdom and Ireland, by default the United Kingdom will be selected)
+* Category (mandatory, drop down where user can select the: Candidate Registration, General, Key Information Document, Temporary Booking Documentation, Terms & Conditions- listed alphabetically)
+* ""CREATE"" button.
+* ""CANCEL"" button.
+
+!xray-attachment://5afd2166-91a4-41da-8903-d18dc9460896|width=1908,height=934!"
+"Add for the ""*Template Name*"" field this text: ""_Test Document Template - Umbrella""._",,"In the ""Template Name"" field will be indicated this text: ""_Test Document Template - Umbrella_""
+
+!xray-attachment://33760dd7-e047-44fb-ba2e-49db913c9db7|width=1553,height=91!"
+"Click on the ""Category"" drop-down and select the ""Temporary Booking Documentation"".
+
+!xray-attachment://98cc0007-6f98-4ddc-ab0a-41474d4fc35f|width=796,height=65!",,"For the Category will be selected ""Temporary Booking Documentation""
+
+!xray-attachment://d26cde10-cc06-4e11-bf8e-323ecf52f267|width=808,height=73!
+
+And under will appear ""Contract Type"" that will have the possibility to select from the ""Limited Company"" (selected by default) Umbrella, PAYE.
+
+!xray-attachment://257970ef-6eb5-4389-b85a-68106be8e3e9|width=344,height=104!"
+"Click on the Country field and select United Kingdom from the drop-down list.
+
+!xray-attachment://c9d937ca-61f3-4b0c-95c0-93e275aebb4e|width=787,height=187!",,"The United Kingdom will be selected by default for the Country field.
+
+!xray-attachment://7c086343-3d6a-406e-92c0-5f543062b62d|width=802,height=157!"
+"On the Contract Type select the ""Umbrella"".
+
+!xray-attachment://a0c9b656-2297-4a1c-ab0d-0a26c16887b1|width=362,height=116!",,"The contract type will be selected ""Umbrella"".
+
+!xray-attachment://4e2425cb-ff68-4c94-973a-408547ebc1cd|width=350,height=122!"
+"Click on the ""*CONTENT*"" tab.
+
+!xray-attachment://596abd0a-065f-4b50-9789-799eb502a3c3|width=353,height=72!",,"The '*CONTENT*' tab will open.
+
+The page will include a placeholder search, categorized options for user selection, and a list of placeholders that can be copied or moved within the CKEditor. 
+
+The Content section will represent the CKEditor interface.
+On the bottom of the page will be buttons ‘CANCEL’ and ‘CREATE’.
+
+!xray-attachment://66910aa2-6743-4c16-85f0-ed6dbf0c1e68|width=1912,height=941!"
+"Click on the ‘General’ category for the placeholder:
+
+
+!xray-attachment://1d855aeb-3dd3-42f9-b32e-a1b91e278026|width=342,height=693!",,"""General"" category will be selected and in the ""Name"" placeholder list will appear all the general palceholders:
+It will show the agreement-date and current_date placeholder.
+
+
+!xray-attachment://b4c41884-df89-4957-845b-3f8ac59e7b44|width=358,height=595!"
+"Copy the current date placeholder and past it in the content body.
+
+!xray-attachment://e5f366c3-e018-42c5-9afc-4099d3489f41|width=300,height=54!",,"In the email body will be inserted the current date placeholder it will be shown like this: ""\{\{current_date}}"".
+
+!xray-attachment://6ccf79de-8ccc-48a3-9953-78c621bf6762|width=1900,height=931!"
+"You can also add some text and edit with the options that CKeditor gives: 
+
+
+!xray-attachment://81e1a4e2-62df-4cd1-ae31-ce4fadd0f2db|width=1168,height=121!",,"The text should be styled as expected.
+
+!xray-attachment://0b6226ec-d3a5-405d-8f0e-dda5e290ab97|width=1892,height=919!"
+"Click on the ‘Export to Word’ button.
+
+!xray-attachment://8dfc21c6-0721-4e2d-91bb-d60d5c3a5d87|width=1028,height=141!",,"The button will be loading and, in the Downlands, will appear information that the word with the name of the template name was exported.
+
+!xray-attachment://134ecc1f-76cc-4c71-ab6e-549998b8b599|width=471,height=187!"
+"Click on the ‘UPLOAD FILE’ tab.
+
+!xray-attachment://3654e040-482f-411d-8162-205f9fd0bc07|width=363,height=97!",,"The UPLOAD FILE’ tab will be opened.
+There will be drop and down section and, in this section, will be this text:
+_""Upload Document*_
+
+_Drag & drop document in this area or click ‘Browse'""_
+
+Near to it will be a 'BROWSE’ button.
+
+!xray-attachment://15383d00-c417-4e8c-863a-db03675dc439|width=1877,height=923!"
+Click on the ‘BROWSE’ button and select or drop and down the downloaded file.,,"Will appear a pill with the name of the downloaded document, the size of it, and an 'X' button. 
+
+!xray-attachment://9854dd39-359a-4831-ae41-841c3a54c58e|width=1901,height=934!"
+"Click on the button ""*Create*"".
+
+!xray-attachment://e14646e1-5a7a-4d35-80ff-ed3a7ab3b75d|width=109,height=71!",,"The 'Create Document Template' page will close, and a *successful green notification will appear*.
+
+
+!xray-attachment://813cf03e-f55e-444f-8038-8938625093f4|width=440,height=187!"
+Look at the first row from the Document Template tab.,,"On the first row, the recently created Document Template will be displayed on the Document Template tab."
+"Click on the All Candidates:
+
+
+!xray-attachment://ce923b4f-d413-41dc-b9eb-d46317678607|width=488,height=885!",,"Recent Candidates page will open: 
+
+!xray-attachment://34a502c0-7bdf-46c7-8220-4a66b0b9263c|width=1888,height=912!"
+"Click on a Candidate that you know that has an 
+
+* Amendment - Placed – Temporary Contract
+* Placed - Temporary Contract - Extension
+* Amendment - Temporary Contract
+* Termination - Temporary Contract
+ and click on it.
+
+Link: [Zenith (digitalzenith.io)|https://www.stage.digitalzenith.io/candidates/5bb8d3a7-d82d-4477-ba99-5b6a649ea385]",,"The Candidate page will open on the Summary tab: 
+
+
+!xray-attachment://2c0edcdc-e8c7-4579-b727-772f8da4ad35|width=1878,height=904!"
+"Click on the Activity tab: 
+
+
+!xray-attachment://3c4606ba-fed7-4d1f-8b5c-0b3896b823e0|width=681,height=65!",,"The activity page will open.
+
+
+!xray-attachment://18cba69c-4500-4f5d-b6a5-c5ace151835f|width=1901,height=927!"
+"Look under the Activity column and find one of the following activities:
+
+* Amendment - Placed – Temporary Contract
+* Placed - Temporary Contract - Extension
+* Amendment - Temporary Contract
+* Termination - Temporary Contract",,"The activity will be represented and near the eye icon will be three dots button.
+
+!xray-attachment://b47a7f33-3a02-464b-b3db-da716f44427b|width=1202,height=451!"
+"Click on the three dots
+
+!xray-attachment://6dbbf0da-e691-42f3-b75b-963ef7ebc5e9|width=1202,height=243!",,"Will appear a ""Create Documentation"" button.
+
+
+!xray-attachment://0d5497aa-053b-492f-b530-2ea2fb861081|width=229,height=102!"
+"Click on the button ""Create Documentation"".
+
+
+!xray-attachment://b480dd18-a6e3-4a68-b41d-c5a74f03a966|width=250,height=144!",,"*Then* I should see the *New Document modal* containing the following information/components:
+
+New Document (title)
+
+Please fill in the relevant fields below:
+
+Activity:
+
+* Selected Activity field
+** the selected activity will be prepopulated and disabled
+
+Document details:
+
+* Contract Type - dropdown (Limited Company, Umbrella, PAYE)
+** default position = Limited Company
+(If the user login with an account that had the primary remit IRL the Umbrella option will disappear)
+
+Content
+
+* Document type - mandatory drop-down field.
+On the bottom of the modal page will be ""CANCEL"" and ""CREATE&DOWNLOAD"" buttons.
+
+!xray-attachment://b6018034-4ca2-42a2-b1c0-d24c9c1ec0bd|width=1470,height=628!"
+"For the Contact type select the ""Umbrella"".",,The Contract Type will be selected Umbrella.
+"Click on the Document Type drop-down.
+
+!xray-attachment://b5869202-9eeb-4f7f-9dbe-013d38bf0ef8|width=1386,height=90!",,"*Then* the relevant document templates that have been created in Amine Centre and Document Templates have:
+
+* the Umbrella contract type.
+* the Temporary Booking Documentation category.
+
+In the List should appear the Document Template that we created with the name: ""Test Document Templates - Umbrella"".
+
+!xray-attachment://f22987ad-7f24-4baf-8975-e21fd2c61ddd|width=1589,height=640!"
+"Click in the drop-down list to this Document Template:  ""Test Document templates - Umbrella"".
+
+!xray-attachment://b5a15f9e-9880-4057-870d-2d5048cba4f3|width=1743,height=880!",,"In the Content will be added the name of the selected Document Template.
+Will appear a new compartment:
+
+File Name *(NEW)*
+
+* File Name - mandatory text field.
+
+Create & Download CTA *(NEW)*
+
+ *And* the File Name field will:
+
+* Prepopulate with the name of the candidate linked to the selected activity (i.e. John Smith) + the stored file name/name of the template. 
+* Be an editable text field so that users can update or change the file name.
+
+!xray-attachment://1810f11d-2d48-491d-a88e-67529c152632|width=1460,height=688!"
+"Click in the File Name field and add this near to the already existing text: 
+""Test""",,"In the end of the file name will be added this text: ""Test"".
+
+!xray-attachment://f032f95b-c3f1-4233-86fe-afdf01ae1538|width=1403,height=107!"
+"Click on the ""CREATE&DOWNLOAD"" button.
+
+
+!xray-attachment://ddb3eb6a-93f4-4669-9d2d-6f50e885a45f|width=220,height=73!",,"Modal page.
+A green notification banner should inform the user: ""Document downloaded successfully.""
+
+!xray-attachment://84cf7e73-5837-43a4-b7a7-8c7882d6be46|width=320,height=103!
+
+The user will observe that the document with the same file name that was added will be downloaded to the computer.
+
+!xray-attachment://0e95b7c4-380e-4643-9dc0-652d65a99fb6|width=501,height=854!"
+"Please click on the newly downloaded document.
+
+!xray-attachment://6b68a60f-7173-471a-98e8-808bc2e6c9ad|width=505,height=881!",,"Selecting the file will open it in Word.
+Above there will be an informative message and a button ""Enable Editing"".
+
+!xray-attachment://5ef50d6c-c87d-4420-9f22-08ba82905756|width=1896,height=974!"
+"Click on the ""Enable Editing"" button.
+
+!xray-attachment://dfc3a081-d9a9-4e18-9631-183c323a440e|width=179,height=49!",,"All the options for editing will become enabled in the word.
+Users will see the information added int eh document, the branding images, and the placeholder being converted in today's date.
+
+!xray-attachment://36c6e806-eebe-42d1-91ea-ab8294c00946|width=1054,height=805!"
+Edit the document template in word then save it.,,The changes made to the document template in Word are successfully saved.
+"Go back to the Candidate Activity page:
+
+!xray-attachment://78a18492-50cd-4c2d-8355-8c546b791c6c|width=1899,height=934!",,"And select the ""Job"" pill from one of these activity cards:
+
+* Amendment - Placed – Temporary Contract
+* Placed - Temporary Contract - Extension
+* Amendment - Temporary Contract
+* Termination - Temporary Contract
+
+
+!xray-attachment://fa0faa03-fae2-4cc7-9aad-d3888416016b|width=1202,height=467!
+
+!blob:https://xray.cloud.getxray.app/30ce117a-734b-4825-a8fd-17cdca78def9|width=1206,height=487!"
+"The Job page will open and click on the Activity tab.
+
+!xray-attachment://4366c0cc-09e8-474f-9d19-507794e2b6bd|width=1902,height=922!",,"Activity page will open:
+
+
+!xray-attachment://19ab7ede-97db-44f9-8396-156ea525712d|width=1989,height=928!"
+"Find udder the Activity column one of these activity cards:
+
+* Amendment - Placed – Temporary Contract
+* Placed - Temporary Contract - Extension
+* Amendment - Temporary Contract
+* Termination - Temporary Contract
+and click on the three dots button.
+
+!xray-attachment://19c747ef-6913-43e2-af3d-78147e82e35b|width=1226,height=235!",,"Will appear a ""Create Documentation"" button.
+
+
+
+
+!xray-attachment://0dbe68fc-858f-46ab-bd03-4ce9ef73a80d|width=227,height=117!"
+"Click on the button ""Create Documentation"".
+
+!xray-attachment://fa26010e-54e3-452a-816c-543ccf0fa537|width=250,height=144!",,"*Then* I should see the *New Document modal* containing the following information/components:
+
+New Document (title)
+
+Please fill in the relevant fields below:
+
+Activity:
+
+* Selected Activity field
+** the selected activity will be prepopulated and disabled
+
+Document details:
+
+* Contract Type -dropdown - Limited Company, Umbrella, PAYE
+** default position = Limited Company
+(If the user login with an account that had the primary remit IRL the Umbrella option will disappear)
+
+Content
+
+* Document type - mandatory drop-down field.
+On the bottom of the modal page will be ""CANCEL"" and ""CREATE&DOWNLOAD"" buttons.
+
+!xray-attachment://239f2329-587b-47f8-84fd-c0ce225eaf71|width=1477,height=605!"
+For the Contract Type select the Umbrella.,,"For the Contract Type, the Umbrella option will be selected."
+"Click on the Document Type drop-down.
+
+
+
+
+!xray-attachment://01649a1a-d290-4f91-b41e-d50a91cd8bf4|width=1145,height=110!",,"*Then* the relevant document templates that have been created in Amine Centre and Document Templates have:
+
+* the Umbrella contract type.
+* the Temporary Booking Documentation category.
+
+In the List should appear the Document Template that we created with the name: ""Test Document templates - Umbrella"".
+
+!xray-attachment://2e9c8476-0a69-44e2-8727-52afba90b6ab|width=1468,height=610!"
+"Click in the drop-down list to this Document Template: ""Test Document templates - Umbrella"".
+
+!xray-attachment://5dfa7e19-1206-4e74-b9c3-09c891d63721|width=1687,height=837!",,"In the Content will be added the name of the selected Document Template.
+Will appear a new compartment:
+
+File Name *(NEW)*
+
+* File Name - mandatory text field.
+
+Create & Download CTA *(NEW)*
+
+ *And* the File Name field will:
+
+* Prepopulate with the name of the candidate linked to the selected activity (i.e. John Smith) + the stored file name/name of the template.
+* Be an editable text field so that users can update or change the file name.
+
+!xray-attachment://01a722b8-1209-43c1-95e5-81976a003e48|width=1470,height=702!"
+"Click in the File Name field and add this near to the already existing text:
+""Test""",,"In the end of the file name will be added this text: ""Test"".
+
+!xray-attachment://72388250-b9a9-4b0f-ae9d-d59cf708a4ff|width=1126,height=108!"
+"Click on the ""CREATE&DOWNLOAD"" button.
+
+
+
+
+!xray-attachment://0167f0f7-4779-46f9-8c44-a56371ea3cd9|width=220,height=73!",,"Modal page will close.
+A green notification banner should inform the user: ""Document downloaded successfully.""
+
+!xray-attachment://26bd01ba-9c95-482e-985d-2022be401aff|width=320,height=103!
+
+The user will observe that the document with the same file name that was added will be downloaded to the computer.
+
+!xray-attachment://47338c65-f9c9-4518-96b3-e947ebfc2821|width=516,height=816!"
+"Please click on the newly downloaded document.
+
+
+
+
+!xray-attachment://e04072e2-0761-47a3-9959-b1e0a90c4881|width=516,height=816!",,"Selecting the file will open it in Word.
+Above there will be an informative message and a button ""Enable Editing"".
+
+!xray-attachment://13da7af2-a3d4-4955-9bd9-086b75b25257|width=1908,height=1003!"
+"Click on the ""Enable Editing"" button.
+
+!xray-attachment://4dbf1fd1-03a7-471c-b411-53c7c856b64d|width=179,height=49!",,"All the options for editing will become enabled in the word.
+Users will see the information added int eh document, t and the placeholder being converted in today's date.
+
+!xray-attachment://862f9bbf-284a-4ff4-a79d-b11c3df1d511|width=1899,height=980!"
+Edit the document template in word then save it.,,The changes made to the document template in Word are successfully saved.

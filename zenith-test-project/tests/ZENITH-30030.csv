@@ -1,0 +1,239 @@
+Action,Data,Expected Result
+"Authorize in Zenith environment with the user’s Zenith Account.
+
+!xray-attachment://3aed98ff-115d-4fc7-8593-91e528d61584|width=411,height=557!",,"The user is successfully authenticated.
+
+!xray-attachment://57e16f28-91dd-49d4-8154-547da955269f|width=643,height=347!"
+"Create a new Candidate to link with the existing Client clicking the right down corner button ""+"" and selecting Candidate.
+
+!xray-attachment://1a52940e-750a-45ef-bf05-d57ab1354552|width=1389,height=645!
+
+!xray-attachment://42f906c8-feb3-442f-b3b2-053af8ae009c|width=1393,height=639!",,"*New Candidate* pop-up window will be displayed.
+
+!xray-attachment://18ac5786-2ee5-408e-95ea-3ea12dab1fd6|width=967,height=802!"
+"Fill out the necessary fields: 
+
+* *First Name*
+* *Family Name*
+* *City / Town / Suburb* 
+* *Contact Details*
+* *Candidate Registration*
+
+And click *CREATE* button",,"The *New Candidate* Form closes and green snackbar is displayed in the down left corner: ""*Candidate is created*"" with *View* button available"
+"Navigate to the newly created Candidate by
+
+clicking *View* button from green snackbar
+
+!xray-attachment://2193f526-de9d-44e6-959e-ff79bb709fc9|width=354,height=63!",,The Candidate Page is displayed.
+Searching for Candidate from *Advance Search* on the left side *Menu*,,Text Kernel Page is redirected.
+"In the Text Kernel *Search bar* look for the *Candidate* name or *Candidate Id* from *Internal* tab.
+
+!xray-attachment://f55e111c-fb1a-48ac-a58a-ebbb2783d462|width=1019,height=669!",,"The Candidate is found.
+
+!xray-attachment://87eca452-d908-468b-a738-417735b2e352|width=1918,height=423!"
+"Navigate to Job Page and Click *ADD Candidate +* button
+
+!xray-attachment://529ce6c1-cf07-4acc-9f12-ba127a75c014|width=1934,height=410!",,"Modal *Add new candidate* modal is open.
+
+!xray-attachment://6e78aa53-4af0-48bd-aa11-9311d497a04b|width=770,height=405!"
+"Click on dropdown *Select Candidate* and input Candidate’s name.
+
+Candidate is found and click *Add* button.",,"The form is closed and green snackbar is displayed: *Candidate is added to Job’s Long list*. 
+
+!xray-attachment://d319ad00-72e3-46de-9601-54ba347016c0|width=328,height=61!"
+"Move the candidate to *Place* status by selecting the candidate and clicking the *Change Status* button.
+
+!xray-attachment://face426c-e10e-437d-bfcb-71469668640e|width=837,height=579!",,"*Place Candidate*  form is displayed. 
+
+Following fields are displayed:
+
+* People involved;
+* Placement type
+* Outcome
+
+*Cancel,* *Save* buttons are available.
+
+!xray-attachment://58ed8887-52b8-4741-bcd6-66a6d980f0ec|width=767,height=860!"
+"Select *Temporary Contract*  and Add the *End date*
+
+Click on Save button.",,"The form is closed and green snackbar is displayed: ""Candidate moved to placed.""
+
+!xray-attachment://1ba5df3d-494e-4ace-9b72-88a1c4d1ef0e|width=297,height=55!
+
+Candidate is present in Job Page, *Placed* status. 
+
+And Billing Alerts is present: *Go to fees tab to pop the booking in OB*.
+
+!xray-attachment://c8e55c2f-c9be-4302-9b5a-d60e8dd654ac|width=811,height=370!"
+Navigate to Fee tab.,,"Pop booking fee is present.
+
+!xray-attachment://08ce28e4-cc50-4197-8a4d-dffb5ce5f3aa|width=984,height=780!"
+Click on *Pop Booking* fee button.,,"Is redirecting to OB page and on Zenith page *Waiting for action in OB* message is present.
+
+!xray-attachment://c80410c0-2ee0-41f5-8994-02cd33985cba|width=567,height=218!"
+"Complete the form for OB:
+
+* Options
+
+!xray-attachment://23ac9d72-2bd0-4a1c-9013-8e5e87cb61c9|width=100%!
+
+* Pay Details
+
+!xray-attachment://b9aaef19-01c4-47af-832b-6f21068bc2b8|width=1501,height=812!
+
+* Dates
+!xray-attachment://c83a22cd-2d08-471a-a561-1689fec138e2|width=1455,height=459!
+* Billing Details
+
+!xray-attachment://38231675-1264-464e-9f1d-7c41371c706c|width=1186,height=446!
+
+* Consultants
+
+!xray-attachment://0d4b2bdb-a83c-4fa4-83f9-efc80d3a15cc|width=1097,height=304!
+
+
+
+* Confirmation",,"After confirming the Confirmation, the next message is displayed.
+
+!xray-attachment://7ac82da7-6533-4dd9-af12-11acad602163|width=507,height=186!"
+"Navigate to Zenith, Job Page, Fee tab",,"The Placed- Temporary Contract fee is in done status.
+
+!xray-attachment://3301c224-633e-4e08-9a69-94e65dffbc9c|width=719,height=807!"
+Check the Candidate Fee tab.,,"Placed - Temporary Contract Fee is present.
+
+!xray-attachment://894e35b3-1dcc-4ec6-9893-a7bb9ee49f83|width=647,height=782!"
+Verify the Client Fee tab,,"Fee is present:
+
+!xray-attachment://ec09b0f4-ae9b-4779-a5c6-06f3dbc277bc|width=617,height=702!"
+Verify the Organisation Fee tab,,"The Fee is present.
+
+!xray-attachment://e40623d5-bb44-4f2d-827b-6b317a33f9a4|width=355,height=515!"
+Verify the Candidate Career tab from Candidate Page,,"Current role is present with Salary details.
+
+!xray-attachment://fc04c6a6-7d6b-4843-8499-77ee5d3f80ca|width=1828,height=565!"
+"From Job Fee Page click on *Amend* button 
+
+!xray-attachment://b6414465-05c6-4c9d-9d03-550d855c23d7|width=581,height=550!",,"The user is redirected to OB Page in another tab
+
+!xray-attachment://afac223d-3502-4f99-b279-c7039903b32f|width=1162,height=376!"
+"Click *Edit* button for *Pay Details*
+
+Insert a new fee 
+
+!xray-attachment://75fcd533-670d-481b-b94d-d93545727020|width=1185,height=927!
+
+Click *Continue*",,"Dates section is open.
+
+!xray-attachment://d720b461-7abc-468c-9e64-249e21433a76|width=1481,height=921!"
+"Insert *Valid from* date between the *Start Date* and *End Date*
+
+Click *Continue*",,"Billing details section is open.
+
+!xray-attachment://c7c2f95d-6340-4aec-bfdd-8edcff4dd7b1|width=1232,height=684!"
+"Click Continue For Next sections:
+
+* Consultants
+
+!xray-attachment://1ded22f0-47fd-46c6-b8a5-95930c39cb48|width=1295,height=289!
+
+* Confirmation
+
+!xray-attachment://dbdccf67-bfe7-424e-b271-1c4e57da63e2|width=1342,height=669!",,"Amend/Extend dialog is open
+
+!xray-attachment://05b2d9d2-5c04-4ed3-bd6a-d1c18114d8d9|width=461,height=276!"
+Insert text and Click *Confirm* button,,"Fee is saved successfully
+
+!xray-attachment://2fc14552-f87a-4109-a751-89107f0a8eb9|width=417,height=145!"
+"From Job Fee tab the Fee is present having status Amended and an arrow in the upper right corner
+
+Click on the arrow",,"The Fee card is extended.
+
+!xray-attachment://6699e545-d8e4-48e2-8d1f-927816addd56|width=532,height=904!"
+"Verify for Client, Candidate and Organisation Fee tab",,"Amended fee card is present without arrow to expand it.
+
+
+
+!xray-attachment://2a3667b4-372f-4376-9bbb-d19b6e6d645f|width=579,height=566!"
+"Go to Job Fee and Click Extend button.
+
+!xray-attachment://40e5f8ab-77ff-48e7-9a5c-b493a1a8159e|width=588,height=593!",,"The user is redirected to OB another tab
+
+Being open on Dates section
+
+!xray-attachment://8d203098-02b6-4272-85bf-7d10c070d2b2|width=1172,height=916!"
+"Insert the *End date* greater then the Previous Contract End date
+
+Click Continue for all sections
+
+* Billing details
+
+!xray-attachment://c99b2364-5534-4f7b-88cf-822fe8e1f639|width=1140,height=469!
+
+
+
+* Consultants
+
+!xray-attachment://51707f3a-4ddf-4fa5-9830-293a5ee85f0d|width=1170,height=328!
+
+
+
+* Confirmation
+
+!xray-attachment://9ac232ba-0d5e-493c-a002-78c193b5db7e|width=1225,height=227!",,"Amend/Extend pop-up dialog is open
+
+!xray-attachment://a72d638f-bdf1-4593-8b64-4d7e0eee5597|width=448,height=267!"
+Insert the text and Click *Confirm*,,"The fee is saved successfully
+
+!xray-attachment://81ab0e61-f29e-46bc-8607-3fadeb14a2e4|width=426,height=143!"
+"After closing the OB page, on Zenith Job Fee Page",,"2 fee cards are present with Status Done and Amended
+
+!xray-attachment://127ffc91-d8eb-4ad8-9f24-94fd8b6b5796|width=1197,height=565!"
+"Navigate on Client, Candidate, Organisation Fee tab",,"There is one fee card that can be extended by the upper right corner
+
+!xray-attachment://4b9c42fd-1598-48cc-97be-72dd2b20cbc6|width=602,height=496!"
+from Job Fee tab Click on *3 dots* → *Terminate* button,,"The user is redirected to OB another tab
+
+!xray-attachment://1dcaade6-a88e-4aa4-a466-5c8528e38345|width=482,height=429!"
+"Insert *reason for termination* text and *End date*, same as the 1st contract start date
+
+Click *Confirm*",,"The Fee is saved.
+
+!xray-attachment://5c51cba0-3acf-41d0-9064-f0c86b05c56d|width=419,height=140!"
+Check the Job Fee tab contains 2 fee cards,,"Cancelled and Terminated one
+
+!xray-attachment://e225031e-758b-45ff-984f-c2d0adce59af|width=1210,height=586!"
+"Check the Client, Candidate, Organisation Fee tab",,"There is one fee card
+
+!xray-attachment://11bfe022-cf26-493b-9a0c-0564706d3f8c|width=626,height=520!"
+"Check the Candidate, Client, Job, Organisation Activities tab",,"Are present:
+
+Placed - Temporary Contract 
+
+Placed-Temporary Contract with Extension
+
+Amend-temporary Contract
+
+Termination - Temporary Contract
+
+!xray-attachment://89d28bfc-2388-42fd-b330-149e601411f3|width=1228,height=611!"
+"From Candidate Page Click on 3 dots from the Upper right corner and options are displayed: 
+
+* Link Client Contact
+* Delete Candidate
+
+Click on *Delete Candidate*.
+
+!xray-attachment://f8479f3c-91be-405f-8953-a9f52cd171df|width=428,height=279!",,"Dialog *Confirm Deletion* pops-up with warning: *Candidate with placement*
+
+!xray-attachment://207c7e3f-d64f-4201-bb48-2261d3907c9c|width=543,height=370!"
+Click on *Confirm* button.,,"Green snackbar: Candidate successfully deleted 
+
+!xray-attachment://f8fd2a46-8825-4a41-bd3d-022362ad9fa1|width=362,height=73!
+
+and the page redirects to Recent Candidates"
+Search for Candidate from *Search* bar in Zenith,,The Candidate is not found.
+Go to *Advance Search* on the left side *Menu*,,Text Kernel Page is redirected.
+Search for Candidate in the search bar in TK,,Candidate can not be found.
+"Navigate to Client Page, Summary and Activities, Fee tab",,No Candidate related activities are present
+"Navigate to Organisation Page, Summary and Activities, Fee tab",,No candidate related activities are present.
+"Navigate to Job Page, Candidates, Activities, Fees tab",,"No candidate related activities, fees are present. Candidate is not present in job Pipeline."

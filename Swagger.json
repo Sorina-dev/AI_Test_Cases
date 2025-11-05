@@ -1,0 +1,6753 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Expense Management API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/employees": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Finds employees by filter",
+        "parameters": [
+          {
+            "name": "Location",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Role",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProjectId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns list of employees",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/me": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Gets information about current user",
+        "responses": {
+          "200": {
+            "description": "Returns information about user",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/api/v1/expenses": {
+      "post": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Creates expense request",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExpenseCollectionRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExpenseCollectionRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExpenseCollectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request created",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseCollectionResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseCollectionResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseCollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to create expense request"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Update list of expenses",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExpenseCollectionRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExpenseCollectionRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExpenseCollectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns requests",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateExpenseCollectionResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateExpenseCollectionResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateExpenseCollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to retrieves expense requests"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/expenses/files": {
+      "post": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Add files",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ExpenseId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "ExpenseId": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "File saved"
+          },
+          "400": {
+            "description": "Unable to save file"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/api/v1/requests/all": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Gets list of all other expense requests for current office ADMIN ONLY",
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MinDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "MaxDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          },
+          {
+            "name": "Order",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns requests",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAllRequestsResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAllRequestsResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAllRequestsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to retrieves expense requests"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/request-expenses/{id}": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Gets list of all expense associated to specific request by request Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns requests",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRequestByIdResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRequestByIdResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRequestByIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to retrieves request requests"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Deletes Request and following expenses by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request deleted"
+          },
+          "404": {
+            "description": "Request not found"
+          }
+        }
+      }
+    },
+    "/api/v1/requests/my": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Gets list of my other expense requests",
+        "parameters": [
+          {
+            "name": "MinDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "MaxDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          },
+          {
+            "name": "Order",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RequestNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns requests",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMyRequestsResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMyRequestsResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMyRequestsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to retrieves expense requests"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/expenses/download-files/{id}": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Retrieves and downloads all files associated with the specified expense ID as a zip archive.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Files downloaded",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Files not found"
+          }
+        }
+      }
+    },
+    "/api/v1/expenses/report": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Downloads .xlsx file with report of the expenses",
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MinDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "MaxDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Files downloaded",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Files not found"
+          }
+        }
+      }
+    },
+    "/api/v1/expenses/file-proof/{expenseId}": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Downloads file for proof",
+        "parameters": [
+          {
+            "name": "expenseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "fileName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File downloaded",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "File not found"
+          }
+        }
+      }
+    },
+    "/api/v1/request-expenses/status/admin": {
+      "patch": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Changes request's status by Admin or LineManager",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRequestExpenseStatusRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRequestExpenseStatusRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRequestExpenseStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status changed",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRequestByIdResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRequestByIdResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRequestByIdResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "Request not found"
+          }
+        }
+      }
+    },
+    "/api/v1/expense-files/delete-specified": {
+      "delete": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Deletes Expense files by name",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteExpenseFilesByNamesRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteExpenseFilesByNamesRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteExpenseFilesByNamesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Expense files deleted"
+          },
+          "404": {
+            "description": "Expense files not found"
+          }
+        }
+      }
+    },
+    "/api/v1/expense-types": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Retrieves the expense types available for a specific department based on the requester's information.",
+        "responses": {
+          "200": {
+            "description": "Returns the list of available expense types for the requester's department.",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseTypesResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseTypesResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseTypesResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Indicates that the requester's information could not be found."
+          }
+        }
+      }
+    },
+    "/api/v1/expenses/status/update": {
+      "patch": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Changes expense's status",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExpenseStatusRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExpenseStatusRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateExpenseStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status changed",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "Expense not found"
+          }
+        }
+      }
+    },
+    "/api/v1/expenses/summary": {
+      "get": {
+        "tags": [
+          "Expenses"
+        ],
+        "summary": "Get summary",
+        "responses": {
+          "200": {
+            "description": "summary retrieved",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseSummaryResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseSummaryResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpenseSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "summary not found"
+          }
+        }
+      }
+    },
+    "/api/v1/integration/data-lake": {
+      "get": {
+        "tags": [
+          "Integrations"
+        ],
+        "summary": "Get all requests with their expenses for the datalake integration",
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "request with expenses retrieved",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataLakeSummaryResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataLakeSummaryResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataLakeSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "No request found"
+          }
+        }
+      }
+    },
+    "/api/v1/locations": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "summary": "Creates new location",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLocationRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLocationRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLocationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Location created",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "summary": "Gets all locations",
+        "parameters": [
+          {
+            "name": "Country",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "City",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "LocationType",
+            "in": "query",
+            "description": "\n\nIndoor\n\nOutdoor",
+            "schema": {
+              "$ref": "#/components/schemas/LocationType"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns locations",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationsListItemPaginatedResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationsListItemPaginatedResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationsListItemPaginatedResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Locations"
+        ],
+        "summary": "Updates location",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Location updated",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Location not found"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/locations/{id}": {
+      "delete": {
+        "tags": [
+          "Locations"
+        ],
+        "summary": "Deletes location",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Location deleted"
+          },
+          "404": {
+            "description": "Location not found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "summary": "Finds location by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns location",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Location not found"
+          }
+        }
+      }
+    },
+    "/api/v1/cities": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "summary": "Gets cities by country",
+        "parameters": [
+          {
+            "name": "CountryId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns cities",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CityResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CityResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CityResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/countries": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "summary": "Gets all countries",
+        "responses": {
+          "200": {
+            "description": "Returns countries",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CountryResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CountryResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CountryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses": {
+      "post": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Creates medical expense request",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMedicalExpenseRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMedicalExpenseRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMedicalExpenseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request created",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalExpenseResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalExpenseResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalExpenseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to create medical expense request"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Updates medical expense request",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpenseRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpenseRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpenseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request updated",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalExpenseResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalExpenseResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicalExpenseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to update medical expense request"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/file-proof": {
+      "post": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Add file proof",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MedicalExpenseId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "MedicalExpenseId": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "File saved"
+          },
+          "400": {
+            "description": "Unable to save file proof"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/{id}": {
+      "delete": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Deletes medical expense request",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request deleted"
+          },
+          "400": {
+            "description": "Deletion failed"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Find medical expense request by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns request",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Medical expense not found"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/file-proof/{id}": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Downloads file for proof",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File downloaded",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "File not found"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/approve-partially": {
+      "put": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Partially approves medical expense request",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveWithCustomAmountRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveWithCustomAmountRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveWithCustomAmountRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request updated",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApproveWithCustomAmountResultResult"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApproveWithCustomAmountResultResult"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApproveWithCustomAmountResultResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to partially approve medical expense request"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/file": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Downloads .xlsx file with medical expenses",
+        "parameters": [
+          {
+            "name": "Year",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File downloaded",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/available-amount": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Gets remaining amount for medical expenses",
+        "responses": {
+          "200": {
+            "description": "Returns available amount",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemainingAmount"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemainingAmount"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemainingAmount"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Available amount not found"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/total-available-amount": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Gets remaining amount and extra budget for medical expenses",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns available amount and extra budget",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/TotalRemainingAmount"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/TotalRemainingAmount"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/TotalRemainingAmount"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Total available amount not found"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/period-expenses": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Gets employee's medical expenses devided by quarters",
+        "responses": {
+          "200": {
+            "description": "Returns expenses",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetExpensePeriodAmountResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetExpensePeriodAmountResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetExpensePeriodAmountResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Current user undefined"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/user": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Gets list of medical expense requests for current user",
+        "parameters": [
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          },
+          {
+            "name": "PeriodType",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PeriodType"
+              }
+            }
+          },
+          {
+            "name": "Year",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Order",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns list of requests",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Current user undefined"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/user/min-year": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Gets year, when the first medical expense by current user was created",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            },
+            "x-enumNames": [
+              "Drafted",
+              "Submitted",
+              "PendingReview",
+              "Approved",
+              "Rejected",
+              "PendingReceipt",
+              "ReceiptSubmitted",
+              "Finished",
+              "PartiallyApproved",
+              "Reviewed",
+              "Examined",
+              "Declined",
+              "Completed"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns minimal year",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Current user undefined"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/admin": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Gets list of all medical expenses for special center",
+        "parameters": [
+          {
+            "name": "RequestNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "EmployeeName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          },
+          {
+            "name": "PeriodType",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PeriodType"
+              }
+            }
+          },
+          {
+            "name": "Year",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Order",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns list of medical expenses",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetMedicalExpenseResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/admin/min-year": {
+      "get": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Gets year, when the first medical expense for special center was created",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            },
+            "x-enumNames": [
+              "Drafted",
+              "Submitted",
+              "PendingReview",
+              "Approved",
+              "Rejected",
+              "PendingReceipt",
+              "ReceiptSubmitted",
+              "Finished",
+              "PartiallyApproved",
+              "Reviewed",
+              "Examined",
+              "Declined",
+              "Completed"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns minimal year",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/status/batch": {
+      "patch": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Batch update for medical expense status",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpensesStatusRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpensesStatusRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpensesStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Request's status updated"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/extra-amount": {
+      "post": {
+        "tags": [
+          "MedicalExpenses"
+        ],
+        "summary": "Create or Update extra budget for user",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExtraBudgetRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExtraBudgetRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExtraBudgetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Extra budget added",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtraBudgetResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtraBudgetResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtraBudgetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/budgets": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "summary": "Gets budget for medical expenses",
+        "responses": {
+          "200": {
+            "description": "Returns budget",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMedicalExpenseBudgetResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMedicalExpenseBudgetResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMedicalExpenseBudgetResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Budget not found"
+          }
+        }
+      }
+    },
+    "/api/v1/medical-expenses/budget": {
+      "patch": {
+        "tags": [
+          "Budgets"
+        ],
+        "summary": "Updates existing budget for medical expenses",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpenseBudgetRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpenseBudgetRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalExpenseBudgetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Budget updated",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateMedicalExpenseBudgetResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateMedicalExpenseBudgetResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateMedicalExpenseBudgetResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "Budget not found"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Get list of notifications",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns notifications",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotificationsResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotificationsResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedNotificationsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Clears all the notifications",
+        "responses": {
+          "204": {
+            "description": "Notifications deleted"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/{id}": {
+      "delete": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Deletes notification",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notification deleted"
+          },
+          "404": {
+            "description": "Notification not found"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/batch": {
+      "patch": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Marks a list of notifications as read",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNotificationsRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNotificationsRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNotificationsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Notifications marked as read"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/offices": {
+      "get": {
+        "tags": [
+          "Offices"
+        ],
+        "summary": "Gets list of all offices",
+        "responses": {
+          "200": {
+            "description": "Returns list of offices",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOfficesResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOfficesResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetOfficesResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/currency": {
+      "get": {
+        "tags": [
+          "Offices"
+        ],
+        "summary": "Gets currency for employee's office",
+        "responses": {
+          "200": {
+            "description": "Return currency",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyType"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyType"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyType"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Currency for your office is undefined"
+          }
+        }
+      }
+    },
+    "/api/v1/periods": {
+      "get": {
+        "tags": [
+          "Periods"
+        ],
+        "summary": "Gets list of periods",
+        "responses": {
+          "200": {
+            "description": "Returns periods",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPeriodsResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPeriodsResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPeriodsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Periods not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Periods"
+        ],
+        "summary": "Updates periods",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpdatePeriodsRequest"
+                }
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpdatePeriodsRequest"
+                }
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpdatePeriodsRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Periods updated",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPeriodsResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPeriodsResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetPeriodsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Wrong number of periods"
+          },
+          "422": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Periods not found"
+          }
+        }
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Gets all projects filtered by name",
+        "parameters": [
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return projects",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectsFromDataLakeResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectsFromDataLakeResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectsFromDataLakeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/user": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Gets list of projects for current user",
+        "responses": {
+          "200": {
+            "description": "Saves and return projects"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/budgets": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "summary": "Finds budgets per month for team building expenses for current office",
+        "responses": {
+          "200": {
+            "description": "Returns budgets",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingBudgetResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingBudgetResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingBudgetResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Office not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/budget": {
+      "put": {
+        "tags": [
+          "Budgets"
+        ],
+        "summary": "Updates existing budget for team building expenses",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingBudgetRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingBudgetRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingBudgetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns budget",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingBudgetResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingBudgetResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingBudgetResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "Budget not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/budgets/available": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "summary": "Gets available spots and amount per person for selected office and month",
+        "parameters": [
+          {
+            "name": "Month",
+            "in": "query",
+            "description": "\n\nJanuary\n\nFebruary\n\nMarch\n\nApril\n\nMay\n\nJune\n\nJuly\n\nAugust\n\nSeptember\n\nOctober\n\nNovember\n\nDecember",
+            "schema": {
+              "$ref": "#/components/schemas/Month"
+            }
+          },
+          {
+            "name": "Year",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OfficeId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns budgets",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableTeamBuildingBudget"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableTeamBuildingBudget"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableTeamBuildingBudget"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses": {
+      "get": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Gets list of team building expense requests for current office",
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MinDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "MaxDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns requests",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingsListResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingsListResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingsListResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Creates team building expense request",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTeamBuildingRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTeamBuildingRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTeamBuildingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request created",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTeamBuildingResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTeamBuildingResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTeamBuildingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The number of participants exceeds the number of spots available"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Updates team building expense request",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request updated",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team building expense not found"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/my": {
+      "get": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Finds team building expense requests for current user",
+        "parameters": [
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns requests",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingsListResponse"
+                  }
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingsListResponse"
+                  }
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetTeamBuildingsListResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Current user undefined"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/{id}/summary": {
+      "get": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Finds team building expense request's summary by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns request'summary",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingSummaryResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingSummaryResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingSummaryResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team building expense not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/individual-cost": {
+      "patch": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Updates individaul cost for team building request",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Amount",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Individual cost updated"
+          },
+          "404": {
+            "description": "Team building expense not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/{id}/participants": {
+      "get": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Finds team building expense request's participants by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns request's participants",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingParticipantsResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingParticipantsResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingParticipantsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team building expense not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/receipt": {
+      "post": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Add receipt",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "TeamBuildingId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "ActualSpend": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "encoding": {
+                "TeamBuildingId": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                },
+                "ActualSpend": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Receipt saved"
+          },
+          "400": {
+            "description": "Unable to save receipt"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/{id}/receipt": {
+      "get": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Get receipt for team building",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File downloaded",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "File not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/status/admin": {
+      "patch": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Changes team building request's status by Admin",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingStatusRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingStatusRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status changed",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "Team building expense not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/status/user": {
+      "patch": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Changes team building request's status by DL",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingStatusRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingStatusRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamBuildingStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status changed",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamBuildingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to update team building request"
+          },
+          "422": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/{id}": {
+      "delete": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Deletes team building expense request",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request deleted"
+          },
+          "404": {
+            "description": "Team building expense not found"
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/{id}/history": {
+      "get": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Get TeamBuilding history",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns TeamBuilding history",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingHistoryResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingHistoryResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamBuildingHistoryResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No TeamBuildingHistory entries found for the given TeamBuildingId."
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/file": {
+      "get": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Downloads .xlsx file with team building expenses",
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MinDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "MaxDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExpenseStatus"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File downloaded",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/team-building-expenses/history/create": {
+      "post": {
+        "tags": [
+          "TeamBuildings"
+        ],
+        "summary": "Create custom TeamBuilding history",
+        "requestBody": {
+          "content": {
+            "application/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomTeamBuildingHistoryRequest"
+              }
+            },
+            "text/json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomTeamBuildingHistoryRequest"
+              }
+            },
+            "application/*+json; x-api-version=1.0": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomTeamBuildingHistoryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request created",
+            "content": {
+              "text/plain; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomTeamBuildingHistoryResponse"
+                }
+              },
+              "application/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomTeamBuildingHistoryResponse"
+                }
+              },
+              "text/json; x-api-version=1.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomTeamBuildingHistoryResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No TeamBuilding history entries found for the given TeamBuildingId."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActionType": {
+        "enum": [
+          "Created",
+          "Approved",
+          "Rejected"
+        ],
+        "type": "string",
+        "description": "\n\nCreated\n\nApproved\n\nRejected",
+        "x-enumNames": [
+          "Created",
+          "Approved",
+          "Rejected"
+        ]
+      },
+      "AddClientParticipantRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddClientParticipantResponse": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "teamBuildingId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddExtraBudgetRequest": {
+        "type": "object",
+        "properties": {
+          "extraAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddParticipantRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddParticipantResponse": {
+        "type": "object",
+        "properties": {
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teamBuildingId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AmountByCurrency": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "approvedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApproveWithCustomAmountRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "approvedAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApproveWithCustomAmountResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "approvedAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApproveWithCustomAmountResultResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ApproveWithCustomAmountResult"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvailableTeamBuildingBudget": {
+        "type": "object",
+        "properties": {
+          "budget": {
+            "$ref": "#/components/schemas/TeamBuildingBudget"
+          },
+          "availableAmount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "City": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CityRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CityResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClientParticipant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "teamBuildingId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teamBuilding": {
+            "$ref": "#/components/schemas/TeamBuilding"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Country": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "cities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/City"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CountryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCustomTeamBuildingHistoryRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "teamBuildingId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCustomTeamBuildingHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "agentId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateExpenseCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "expenses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateExpenseRequest"
+            },
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateExpenseRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isBusinessTrip": {
+            "type": "boolean"
+          },
+          "isCustomerRecharge": {
+            "type": "boolean"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExpenseType"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "inboundLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "outboundLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "expenseSequenceNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateLinkRequest": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateLocationRequest": {
+        "type": "object",
+        "properties": {
+          "countryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "city": {
+            "$ref": "#/components/schemas/CityRequest"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationType": {
+            "$ref": "#/components/schemas/LocationType"
+          },
+          "warrantyLetter": {
+            "type": "boolean"
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMedicalExpenseRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "periodType": {
+            "$ref": "#/components/schemas/PeriodType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateLinkRequest"
+            },
+            "nullable": true
+          },
+          "fileNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateTeamBuildingRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/TeamBuildingDescription"
+          },
+          "paidBy": {
+            "$ref": "#/components/schemas/PaidByType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "businessCase": {
+            "type": "string",
+            "nullable": true
+          },
+          "officeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organizerEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addParticipantRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddParticipantRequest"
+            },
+            "nullable": true
+          },
+          "addClientsRequest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddClientParticipantRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateTeamBuildingResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "$ref": "#/components/schemas/TeamBuildingDescription"
+          },
+          "paidBy": {
+            "$ref": "#/components/schemas/PaidByType"
+          },
+          "locationType": {
+            "$ref": "#/components/schemas/LocationType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "businessCase": {
+            "type": "string",
+            "nullable": true
+          },
+          "individualAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "addParticipantResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddParticipantResponse"
+            },
+            "nullable": true
+          },
+          "addClientParticipantResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddClientParticipantResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CurrencyType": {
+        "enum": [
+          "EUR",
+          "GBP",
+          "MDL",
+          "RON",
+          "BGN",
+          "UAH",
+          "AED",
+          "USD"
+        ],
+        "type": "string",
+        "description": "\n\nEUR\n\nGBP\n\nMDL\n\nRON\n\nBGN\n\nUAH\n\nAED\n\nUSD",
+        "x-enumNames": [
+          "EUR",
+          "GBP",
+          "MDL",
+          "RON",
+          "BGN",
+          "UAH",
+          "AED",
+          "USD"
+        ]
+      },
+      "DataLakeExpenseRequestResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "project": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "approvedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isBusinessTrip": {
+            "type": "boolean"
+          },
+          "isCustomerRecharge": {
+            "type": "boolean"
+          },
+          "rejectReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExpenseFileResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataLakeResponse": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "employee": {
+            "type": "string",
+            "nullable": true
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "departmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "expenses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataLakeExpenseRequestResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataLakeSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "totalRequests": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataLakeResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteExpenseFilesByNamesRequest": {
+        "type": "object",
+        "properties": {
+          "expenseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "officeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "dataLakeEntityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snapshotId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "department": {
+            "type": "string",
+            "nullable": true
+          },
+          "teamBuilding": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamBuilding"
+            },
+            "nullable": true
+          },
+          "office": {
+            "$ref": "#/components/schemas/Office"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeExportResponse": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeResponse": {
+        "required": [
+          "email",
+          "firstName",
+          "id",
+          "lastName",
+          "location",
+          "role",
+          "startDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "firstName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "lastName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "location": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "role": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExpenseCollectionResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "expenses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExpenseResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExpenseFileResponse": {
+        "required": [
+          "file",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "file": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExpenseResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isBussinessTrip": {
+            "type": "boolean"
+          },
+          "isCustomerRecharge": {
+            "type": "boolean"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "expenseSequenceNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejectReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExpenseType"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExpenseStatus": {
+        "enum": [
+          "Drafted",
+          "Submitted",
+          "PendingReview",
+          "Approved",
+          "Rejected",
+          "PendingReceipt",
+          "ReceiptSubmitted",
+          "Finished",
+          "PartiallyApproved",
+          "Reviewed",
+          "Examined",
+          "Declined",
+          "Completed"
+        ],
+        "type": "string",
+        "description": "\n\nDrafted\n\nSubmitted\n\nPendingReview\n\nApproved\n\nRejected\n\nPendingReceipt\n\nReceiptSubmitted\n\nFinished\n\nPartiallyApproved\n\nReviewed\n\nExamined\n\nDeclined\n\nCompleted",
+        "x-enumNames": [
+          "Drafted",
+          "Submitted",
+          "PendingReview",
+          "Approved",
+          "Rejected",
+          "PendingReceipt",
+          "ReceiptSubmitted",
+          "Finished",
+          "PartiallyApproved",
+          "Reviewed",
+          "Examined",
+          "Declined",
+          "Completed"
+        ]
+      },
+      "ExpenseSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "inReview": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "approved": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejected": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExpenseType": {
+        "enum": [
+          "MedicalAllowance",
+          "TeamBuilding",
+          "Other",
+          "Transportation",
+          "Gas",
+          "EntertainmentCustomers",
+          "EntertainmentOverseasCustomers",
+          "TBD",
+          "Accommodation",
+          "Travel",
+          "Subsistence",
+          "Mileage",
+          "Events",
+          "Training",
+          "SoftwareSubscriptions",
+          "EmployeeEngagement",
+          "PerDiem"
+        ],
+        "type": "string",
+        "description": "\n\nMedicalAllowance\n\nTeamBuilding\n\nOther\n\nTransportation\n\nGas\n\nEntertainmentCustomers\n\nEntertainmentOverseasCustomers\n\nTBD\n\nAccommodation\n\nTravel\n\nSubsistence\n\nMileage\n\nEvents\n\nTraining\n\nSoftwareSubscriptions\n\nEmployeeEngagement\n\nPerDiem",
+        "x-enumNames": [
+          "MedicalAllowance",
+          "TeamBuilding",
+          "Other",
+          "Transportation",
+          "Gas",
+          "EntertainmentCustomers",
+          "EntertainmentOverseasCustomers",
+          "TBD",
+          "Accommodation",
+          "Travel",
+          "Subsistence",
+          "Mileage",
+          "Events",
+          "Training",
+          "SoftwareSubscriptions",
+          "EmployeeEngagement",
+          "PerDiem"
+        ]
+      },
+      "ExpenseTypesResponse": {
+        "type": "object",
+        "properties": {
+          "types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExpenseType"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExtraBudgetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "extraAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileProofResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAllRequestsResponse": {
+        "type": "object",
+        "properties": {
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "submittedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "employee": {
+            "type": "string",
+            "nullable": true
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "numberOfExpenses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "decisionMadeBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "amountsByCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AmountByCurrency"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetExpensePeriodAmountResponse": {
+        "type": "object",
+        "properties": {
+          "periodType": {
+            "$ref": "#/components/schemas/PeriodType"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "expense": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMedicalExpenseBudgetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "officeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "officeCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMedicalExpenseResponse": {
+        "required": [
+          "amount",
+          "approvedAmount",
+          "createdOn",
+          "currency",
+          "description",
+          "employee",
+          "files",
+          "id",
+          "links",
+          "periodType",
+          "rejectionReason",
+          "requestNumber",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "rejectionReason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "approvedAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "periodType": {
+            "$ref": "#/components/schemas/PeriodType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "submittedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "employee": {
+            "$ref": "#/components/schemas/EmployeeExportResponse"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkResponse"
+            }
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileProofResponse"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMyRequestsResponse": {
+        "required": [
+          "createdOn",
+          "numberOfExpenses",
+          "requestId",
+          "requestNumber",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "submittedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numberOfExpenses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "decisionMadeBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "amountsByCurrency": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AmountByCurrency"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetOfficesResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataLakeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "countryName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetPeriodsResponse": {
+        "required": [
+          "endDate",
+          "id",
+          "startDate",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PeriodType"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetRequestByIdResponse": {
+        "required": [
+          "createdOn",
+          "employeeId",
+          "expenses",
+          "id",
+          "isDeleted",
+          "requestNumber",
+          "status",
+          "submittedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "submittedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expenses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RequestExpenseResponse"
+            }
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTeamBuildingBudgetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "office": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "totalAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amountPerPerson": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remainingAmount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "remainingSpots": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTeamBuildingHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "agent": {
+            "type": "string",
+            "nullable": true
+          },
+          "agentRole": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTeamBuildingParticipantsResponse": {
+        "required": [
+          "currency",
+          "individualCost",
+          "participantCount",
+          "participants"
+        ],
+        "type": "object",
+        "properties": {
+          "individualCost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "participantCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmployeeResponse"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTeamBuildingSummaryResponse": {
+        "required": [
+          "actualSpend",
+          "businessCase",
+          "eventDate",
+          "eventPurpose",
+          "id",
+          "isDeleted",
+          "location",
+          "office",
+          "organizer",
+          "paidBy",
+          "project",
+          "rejectionReason",
+          "requestNumber",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "project": {
+            "$ref": "#/components/schemas/ProjectResponse"
+          },
+          "eventPurpose": {
+            "$ref": "#/components/schemas/TeamBuildingDescription"
+          },
+          "paidBy": {
+            "$ref": "#/components/schemas/PaidByType"
+          },
+          "office": {
+            "$ref": "#/components/schemas/OfficeResponse"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationsListItem"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "businessCase": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "rejectionReason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "organizer": {
+            "$ref": "#/components/schemas/EmployeeResponse"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "actualSpend": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTeamBuildingsListResponse": {
+        "required": [
+          "actualSpend",
+          "center",
+          "currency",
+          "employee",
+          "id",
+          "individualAmount",
+          "participantsNumber",
+          "project",
+          "requestNumber",
+          "startDate",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/EmployeeExportResponse"
+          },
+          "project": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "center": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "individualAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "participantsNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actualSpend": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LinkResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationType": {
+            "$ref": "#/components/schemas/LocationType"
+          },
+          "warrantyLetter": {
+            "type": "boolean"
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "city": {
+            "$ref": "#/components/schemas/City"
+          },
+          "cityId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "country": {
+            "$ref": "#/components/schemas/CountryResponse"
+          },
+          "city": {
+            "$ref": "#/components/schemas/CityResponse"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationType": {
+            "$ref": "#/components/schemas/LocationType"
+          },
+          "warrantyLetter": {
+            "type": "boolean"
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocationType": {
+        "enum": [
+          "Indoor",
+          "Outdoor"
+        ],
+        "type": "string",
+        "description": "\n\nIndoor\n\nOutdoor",
+        "x-enumNames": [
+          "Indoor",
+          "Outdoor"
+        ]
+      },
+      "LocationsListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationType": {
+            "$ref": "#/components/schemas/LocationType"
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocationsListItemPaginatedResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocationsListItem"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "perPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicalExpenseResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "periodType": {
+            "$ref": "#/components/schemas/PeriodType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkResponse"
+            },
+            "nullable": true
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileProofResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Month": {
+        "enum": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ],
+        "type": "string",
+        "description": "\n\nJanuary\n\nFebruary\n\nMarch\n\nApril\n\nMay\n\nJune\n\nJuly\n\nAugust\n\nSeptember\n\nOctober\n\nNovember\n\nDecember",
+        "x-enumNames": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ]
+      },
+      "NotificationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "expenseType": {
+            "$ref": "#/components/schemas/ExpenseType"
+          },
+          "action": {
+            "$ref": "#/components/schemas/ActionType"
+          },
+          "payload": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isRead": {
+            "type": "boolean"
+          },
+          "agentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Office": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataLakeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "country": {
+            "$ref": "#/components/schemas/Country"
+          },
+          "countryId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OfficeResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataLakeName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaginatedNotificationsResponse": {
+        "type": "object",
+        "properties": {
+          "newCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotificationResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaidByType": {
+        "enum": [
+          "Amdaris",
+          "Client",
+          "SharedCost"
+        ],
+        "type": "string",
+        "description": "\n\nAmdaris\n\nClient\n\nSharedCost",
+        "x-enumNames": [
+          "Amdaris",
+          "Client",
+          "SharedCost"
+        ]
+      },
+      "Participant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
+          },
+          "teamBuilding": {
+            "$ref": "#/components/schemas/TeamBuilding"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teamBuildingId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PeriodType": {
+        "enum": [
+          "First",
+          "Second",
+          "Third",
+          "Fourth"
+        ],
+        "type": "string",
+        "description": "\n\nFirst\n\nSecond\n\nThird\n\nFourth",
+        "x-enumNames": [
+          "First",
+          "Second",
+          "Third",
+          "Fourth"
+        ]
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
+          },
+          "teamBuilding": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamBuilding"
+            },
+            "nullable": true
+          },
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dataLakeEntityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snapshotId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectsFromDataLakeResponse": {
+        "type": "object",
+        "properties": {
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RemainingAmount": {
+        "required": [
+          "availableAmount",
+          "expiryDate"
+        ],
+        "type": "object",
+        "properties": {
+          "availableAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RequestExpenseResponse": {
+        "required": [
+          "amount",
+          "approvedAmount",
+          "currency",
+          "description",
+          "employee",
+          "endDate",
+          "eventDate",
+          "fileNames",
+          "id",
+          "inboundLocation",
+          "isBusinessTrip",
+          "isCustomerRecharge",
+          "name",
+          "outboundLocation",
+          "project",
+          "rejectReason",
+          "startDate",
+          "status",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employee": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "project": {
+            "$ref": "#/components/schemas/Project"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "approvedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isBusinessTrip": {
+            "type": "boolean"
+          },
+          "isCustomerRecharge": {
+            "type": "boolean"
+          },
+          "rejectReason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "inboundLocation": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "outboundLocation": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExpenseType"
+          },
+          "fileNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeamBuilding": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "requestNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": {
+            "$ref": "#/components/schemas/TeamBuildingDescription"
+          },
+          "paidBy": {
+            "$ref": "#/components/schemas/PaidByType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "businessCase": {
+            "type": "string",
+            "nullable": true
+          },
+          "rejectionReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "individualAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "actualSpend": {
+            "type": "number",
+            "format": "double"
+          },
+          "office": {
+            "$ref": "#/components/schemas/Office"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "project": {
+            "$ref": "#/components/schemas/Project"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Participant"
+            },
+            "nullable": true
+          },
+          "clientParticipants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientParticipant"
+            },
+            "nullable": true
+          },
+          "teamBuildingHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamBuildingHistory"
+            },
+            "nullable": true
+          },
+          "officeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeamBuildingBudget": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "totalAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amountPerPerson": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "office": {
+            "$ref": "#/components/schemas/Office"
+          },
+          "officeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeamBuildingDescription": {
+        "enum": [
+          "ProjectOnboarding",
+          "ProjectClosing",
+          "ClientVisit",
+          "TeamEngagement"
+        ],
+        "type": "string",
+        "description": "\n\nProjectOnboarding\n\nProjectClosing\n\nClientVisit\n\nTeamEngagement",
+        "x-enumNames": [
+          "ProjectOnboarding",
+          "ProjectClosing",
+          "ClientVisit",
+          "TeamEngagement"
+        ]
+      },
+      "TeamBuildingHistory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "agent": {
+            "$ref": "#/components/schemas/Employee"
+          },
+          "teamBuilding": {
+            "$ref": "#/components/schemas/TeamBuilding"
+          },
+          "agentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teamBuildingId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TotalRemainingAmount": {
+        "required": [
+          "availableAmount",
+          "employeeId",
+          "expiryDate",
+          "extraAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "availableAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "extraAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateExpenseCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "expenses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateExpenseRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateExpenseCollectionResponse": {
+        "type": "object",
+        "properties": {
+          "expenses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExpenseResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateExpenseRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isBusinessTrip": {
+            "type": "boolean"
+          },
+          "isCustomerRecharge": {
+            "type": "boolean"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExpenseType"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "inboundLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "outboundLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "expenseSequenceNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateExpenseStatusRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateFileRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateLinkRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateLocationRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "countryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "city": {
+            "$ref": "#/components/schemas/CityRequest"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationType": {
+            "$ref": "#/components/schemas/LocationType"
+          },
+          "warrantyLetter": {
+            "type": "boolean"
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMedicalExpenseBudgetRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMedicalExpenseBudgetResponse": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "office": {
+            "$ref": "#/components/schemas/Office"
+          },
+          "officeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMedicalExpenseRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "periodType": {
+            "$ref": "#/components/schemas/PeriodType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateLinkRequest"
+            },
+            "nullable": true
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateFileRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMedicalExpensesStatusRequest": {
+        "required": [
+          "medicalExpenses",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "medicalExpenses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateNotificationsRequest": {
+        "type": "object",
+        "properties": {
+          "notificationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePeriodsRequest": {
+        "required": [
+          "endDate",
+          "id",
+          "startDate",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PeriodType"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateRequestExpenseStatusRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTeamBuildingBudgetRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "totalAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amountPerPerson": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTeamBuildingRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "$ref": "#/components/schemas/TeamBuildingDescription"
+          },
+          "paidBy": {
+            "$ref": "#/components/schemas/PaidByType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "businessCase": {
+            "type": "string",
+            "nullable": true
+          },
+          "officeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dataLakeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organizerEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addParticipantRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddParticipantRequest"
+            },
+            "nullable": true
+          },
+          "addClientsRequest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddClientParticipantRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTeamBuildingResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/TeamBuildingDescription"
+          },
+          "paidBy": {
+            "$ref": "#/components/schemas/PaidByType"
+          },
+          "locationType": {
+            "$ref": "#/components/schemas/LocationType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "businessCase": {
+            "type": "string",
+            "nullable": true
+          },
+          "individualAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyType"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "addParticipantResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddParticipantResponse"
+            },
+            "nullable": true
+          },
+          "addClientParticipantResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddClientParticipantResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTeamBuildingStatusRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExpenseStatus"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Please enter a valid token",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}
