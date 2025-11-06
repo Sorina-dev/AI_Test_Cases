@@ -2,7 +2,11 @@
   "name": "ai-test-cases",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start-mcp-server": "node mcp-playwright-server.js",
+    "test-playwright": "npx playwright test",
+    "extract-bugs": "node run-bug-extraction.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -10,5 +14,9 @@
   "devDependencies": {
     "@playwright/test": "^1.54.1",
     "@types/node": "^24.1.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.21.0",
+    "playwright": "^1.56.1"
   }
 }

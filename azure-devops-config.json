@@ -1,0 +1,16 @@
+{
+  "organization": "amdaris",
+  "project": "Expense Management",
+  "personalAccessToken": "63P1HhJCfzhTb6sQs1Z6M2FZTtqvVN1HRqOItDm3EvTjY36CgeQmJQQJ99BKACAAAAAD67QnAAASAZDO2YlL",
+  "outputFile": "bugs_export.csv",
+  "maxResults": 50,
+  "filters": {
+    "state": "",
+    "assignedTo": "",
+    "area": "",
+    "priority": "",
+    "severity": "",
+    "createdAfter": "2024-01-01",
+    "tags": ""
+  }
+}
