@@ -1,0 +1,308 @@
+{
+  "projectInfo": {
+    "name": "AI Test Cases - Expense Management System",
+    "version": "1.0.0",
+    "description": "Comprehensive testing framework for expense management system with AI-enhanced testing capabilities",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Sorina-dev/AI_Test_Cases.git"
+    },
+    "author": "Sorina Cristian",
+    "license": "ISC"
+  },
+
+  "database": {
+    "mssql": {
+      "server": "sql-expensemanagement-stage.database.windows.net",
+      "port": 1433,
+      "user": "emAdmin",
+      "password": "01!BmCef<UNOB9YatkQk",
+      "database": "sqldb-expensemanagement-stage",
+      "options": {
+        "encrypt": true,
+        "trustServerCertificate": false,
+        "enableArithAbort": true,
+        "requestTimeout": 30000,
+        "connectionTimeout": 30000
+      },
+      "pool": {
+        "max": 10,
+        "min": 0,
+        "idleTimeoutMillis": 30000
+      }
+    }
+  },
+
+  "azureDevOps": {
+    "organization": "amdaris",
+    "project": "Expense Management",
+    "personalAccessToken": "63P1HhJCfzhTb6sQs1Z6M2FZTtqvVN1HRqOItDm3EvTjY36CgeQmJQQJ99BKACAAAAAD67QnAAASAZDO2YlL",
+    "outputFile": "bugs_export.csv",
+    "maxResults": 50,
+    "filters": {
+      "state": "",
+      "assignedTo": "",
+      "area": "",
+      "priority": "",
+      "severity": "",
+      "createdAfter": "2024-01-01",
+      "tags": ""
+    },
+    "apiBaseUrl": "https://dev.azure.com/amdaris",
+    "defaultWorkItemTypes": ["Bug", "Task", "User Story", "Test Case"]
+  },
+
+  "jira": {
+    "atlassian": {
+      "url": "https://robertwalters.atlassian.net",
+      "username": "irena.smaghina-contractor@robertwalters.com",
+      "apiToken": "fGf0VlJ_WdGfTGfJhuY7WMJEOYbMBqpM8_3C_tPSAdKPhdRlBbX-9yE7KGlDvZWqUv",
+      "projectKeys": ["EM", "TEST"],
+      "defaultIssueTypes": ["Bug", "Story", "Task", "Test"]
+    }
+  },
+
+  "mcp": {
+    "servers": {
+      "database-operations": {
+        "type": "stdio",
+        "command": "node",
+        "args": ["mcp-combined-server.js"],
+        "description": "Combined MCP server for database operations and Playwright automation",
+        "capabilities": ["database", "playwright", "sql-queries", "performance-testing"],
+        "env": {
+          "NODE_ENV": "development"
+        }
+      },
+      "mcp-atlassian": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-atlassian"],
+        "env": {
+          "JIRA_URL": "https://robertwalters.atlassian.net",
+          "JIRA_USERNAME": "irena.smaghina-contractor@robertwalters.com",
+          "JIRA_API_TOKEN": "fGf0VlJ_WdGfTGfJhuY7WMJEOYbMBqpM8_3C_tPSAdKPhdRlBbX-9yE7KGlDvZWqUv"
+        },
+        "description": "Atlassian Jira integration for issue management"
+      },
+      "playwright-automation": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "playwright/mcp@latest"],
+        "description": "Playwright automation for web testing"
+      },
+      "azure-devops": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@azure-devops/mcp", "${input:ado_org=amdaris}"],
+        "description": "Azure DevOps integration for work item management"
+      },
+      "memory-server": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-memory"],
+        "description": "Persistent memory server for conversation context"
+      }
+    }
+  },
+
+  "playwright": {
+    "testDir": "./tests",
+    "fullyParallel": true,
+    "forbidOnly": true,
+    "retries": 2,
+    "workers": 1,
+    "reporter": "html",
+    "timeout": 30000,
+    "expect": {
+      "timeout": 5000
+    },
+    "use": {
+      "baseURL": "https://expense-management-stage.azurewebsites.net",
+      "trace": "on-first-retry",
+      "screenshot": "only-on-failure",
+      "video": "retain-on-failure",
+      "actionTimeout": 10000,
+      "navigationTimeout": 30000
+    },
+    "projects": [
+      {
+        "name": "chromium",
+        "use": { 
+          "...devices.Desktop Chrome": true,
+          "viewport": { "width": 1280, "height": 720 }
+        }
+      },
+      {
+        "name": "firefox",
+        "use": { "...devices.Desktop Firefox": true }
+      },
+      {
+        "name": "webkit",
+        "use": { "...devices.Desktop Safari": true }
+      },
+      {
+        "name": "mobile-chrome",
+        "use": { "...devices.Pixel 5": true }
+      }
+    ]
+  },
+
+  "testing": {
+    "performance": {
+      "database": {
+        "maxResponseTime": 200,
+        "iterations": 5,
+        "concurrentUsers": 10,
+        "testQueries": [
+          "employees-basic",
+          "expenses-filtered",
+          "medical-expenses",
+          "department-summary",
+          "status-analysis"
+        ]
+      },
+      "web": {
+        "maxPageLoadTime": 3000,
+        "maxApiResponseTime": 1000,
+        "lighthouse": {
+          "performance": 90,
+          "accessibility": 95,
+          "bestPractices": 90,
+          "seo": 85
+        }
+      }
+    },
+    "security": {
+      "sqlInjection": true,
+      "xss": true,
+      "csrf": true,
+      "authentication": true,
+      "authorization": true
+    },
+    "coverage": {
+      "statements": 80,
+      "branches": 75,
+      "functions": 80,
+      "lines": 80
+    }
+  },
+
+  "ci-cd": {
+    "github": {
+      "actions": {
+        "workflowFile": ".github/workflows/test-suite.yml",
+        "triggers": ["push", "pull_request"],
+        "schedule": "0 6 * * *",
+        "secrets": [
+          "AZURE_SQL_CONNECTION",
+          "JIRA_API_TOKEN",
+          "AZURE_DEVOPS_PAT"
+        ]
+      }
+    },
+    "deployment": {
+      "staging": {
+        "url": "https://expense-management-stage.azurewebsites.net",
+        "database": "sqldb-expensemanagement-stage"
+      },
+      "production": {
+        "url": "https://expense-management.azurewebsites.net",
+        "database": "sqldb-expensemanagement-prod"
+      }
+    }
+  },
+
+  "logging": {
+    "level": "info",
+    "formats": ["console", "file", "json"],
+    "outputs": {
+      "file": "./logs/application.log",
+      "errorFile": "./logs/errors.log",
+      "testResults": "./test-results/",
+      "reports": "./reports/"
+    },
+    "retention": {
+      "days": 30,
+      "maxSize": "100MB"
+    }
+  },
+
+  "dependencies": {
+    "runtime": {
+      "node": ">=18.0.0",
+      "npm": ">=9.0.0"
+    },
+    "packages": {
+      "@modelcontextprotocol/sdk": "^1.21.0",
+      "mssql": "^12.1.0",
+      "playwright": "^1.56.1",
+      "@playwright/test": "^1.56.1",
+      "@types/node": "^24.1.0"
+    },
+    "optional": {
+      "docker": ">=20.10.0",
+      "azure-cli": ">=2.50.0"
+    }
+  },
+
+  "scripts": {
+    "database": {
+      "test-connection": "node database-connection.js",
+      "performance-test": "node database-performance-test.js",
+      "run-analysis": "node medical-expense-analysis.js"
+    },
+    "testing": {
+      "playwright": "npx playwright test",
+      "playwright-ui": "npx playwright test --ui",
+      "playwright-headed": "npx playwright test --headed",
+      "test-report": "npx playwright show-report"
+    },
+    "mcp": {
+      "start-combined": "node mcp-combined-server.js",
+      "start-playwright": "node mcp-playwright-server.js"
+    },
+    "devops": {
+      "extract-bugs": "node run-bug-extraction.js",
+      "azure-login": "az login",
+      "deploy-staging": "az webapp deployment source config-zip"
+    }
+  },
+
+  "environments": {
+    "development": {
+      "database": {
+        "server": "localhost",
+        "database": "expense-management-dev",
+        "user": "dev-user"
+      },
+      "api": {
+        "baseUrl": "http://localhost:3000"
+      },
+      "logging": {
+        "level": "debug"
+      }
+    },
+    "staging": {
+      "database": {
+        "server": "sql-expensemanagement-stage.database.windows.net",
+        "database": "sqldb-expensemanagement-stage"
+      },
+      "api": {
+        "baseUrl": "https://expense-management-stage.azurewebsites.net"
+      }
+    },
+    "production": {
+      "database": {
+        "server": "sql-expensemanagement-prod.database.windows.net",
+        "database": "sqldb-expensemanagement-prod"
+      },
+      "api": {
+        "baseUrl": "https://expense-management.azurewebsites.net"
+      },
+      "logging": {
+        "level": "warn"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+Test Receipt for Per Diem Travel Expense
+
+Company: Amdaris
+Employee: Sorina Cristian
+Travel Dates: 15/11/2025 - 17/11/2025
+Destination: Chicago, IL
+Purpose: Client meetings and project review
+
+Expense Details:
+- Accommodation: $300
+- Meals: $120
+- Transportation: $30
+
+Total: $450 USD
+
+This is a test document for BDD automation testing.

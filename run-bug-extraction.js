@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const AzureDevOpsBugExtractor = require('./azure-devops-bugs-extractor.js');
-const fs = require('fs');
+import AzureDevOpsBugExtractor from './azure-devops-bugs-extractor.js';
+import fs from 'fs';
 
 async function runBugExtraction() {
   try {
-    // Load configuration
-    const configPath = './azure-devops-config.json';
+    // Load configuration from unified config
+    const configPath = './unified-config.json';
     
     if (!fs.existsSync(configPath)) {
       console.error('❌ Configuration file not found: ' + configPath);
-      console.log('📝 Please copy azure-devops-config.json and fill in your details:');
+      console.log('📝 Please ensure unified-config.json exists with azureDevOps section');
       console.log('   - organization: Your Azure DevOps organization name');
       console.log('   - project: Your project name');
       console.log('   - personalAccessToken: Your PAT token');
@@ -18,20 +18,21 @@ async function runBugExtraction() {
     }
 
     const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    const adoConfig = config.azureDevOps; // Get Azure DevOps section from unified config
     
     // Validate required configuration
-    if (!config.organization || config.organization === 'YOUR_ORGANIZATION_NAME') {
-      console.error('❌ Please set your organization name in azure-devops-config.json');
+    if (!adoConfig.organization || adoConfig.organization === 'YOUR_ORGANIZATION_NAME') {
+      console.error('❌ Please set your organization name in unified-config.json azureDevOps section');
       process.exit(1);
     }
     
-    if (!config.project || config.project === 'YOUR_PROJECT_NAME') {
-      console.error('❌ Please set your project name in azure-devops-config.json');
+    if (!adoConfig.project || adoConfig.project === 'YOUR_PROJECT_NAME') {
+      console.error('❌ Please set your project name in unified-config.json azureDevOps section');
       process.exit(1);
     }
     
-    if (!config.personalAccessToken || config.personalAccessToken === 'YOUR_PERSONAL_ACCESS_TOKEN') {
-      console.error('❌ Please set your Personal Access Token in azure-devops-config.json');
+    if (!adoConfig.personalAccessToken || adoConfig.personalAccessToken === 'YOUR_PERSONAL_ACCESS_TOKEN') {
+      console.error('❌ Please set your Personal Access Token in unified-config.json azureDevOps section');
       console.log('ℹ️  How to create a PAT:');
       console.log('   1. Go to https://dev.azure.com/{organization}/_usersSettings/tokens');
       console.log('   2. Click "New Token"');
@@ -41,14 +42,14 @@ async function runBugExtraction() {
     }
 
     console.log(`🔗 Connecting to Azure DevOps...`);
-    console.log(`   Organization: ${config.organization}`);
-    console.log(`   Project: ${config.project}`);
+    console.log(`   Organization: ${adoConfig.organization}`);
+    console.log(`   Project: ${adoConfig.project}`);
 
-    const extractor = new AzureDevOpsBugExtractor(config);
+    const extractor = new AzureDevOpsBugExtractor(adoConfig);
 
     // Clean up filters (remove empty values)
     const filters = {};
-    for (const [key, value] of Object.entries(config.filters || {})) {
+    for (const [key, value] of Object.entries(adoConfig.filters || {})) {
       if (value && value.trim() !== '') {
         filters[key] = value.trim();
       }

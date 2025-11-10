@@ -1,0 +1,61 @@
+{
+  "mcp": {
+    "servers": {
+      "database-operations": {
+        "type": "stdio",
+        "command": "node",
+        "args": ["mcp-combined-server.js"],
+        "description": "Combined MCP server for database operations and Playwright automation",
+        "env": {
+          "NODE_ENV": "development"
+        }
+      },
+      "mcp-atlassian": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-atlassian"],
+        "env": {
+          "JIRA_URL": "https://example.atlassian.net",
+          "JIRA_USERNAME": "sorina.cristian@example.com",
+          "JIRA_API_TOKEN": "example-fGf0VlJ_WdGfTGfJhuY7WMJEOYbMBqpM8_3C_tPSAdKPhdRlBbX-9yE7KGlDvZWqUv"
+        },
+        "description": "Atlassian Jira integration for issue management"
+      },
+      "playwright-automation": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "playwright/mcp@latest"],
+        "description": "Playwright automation for web testing"
+      },
+      "azure-devops": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@azure-devops/mcp", "amdaris", "--authentication", "env"],
+        "description": "Azure DevOps integration for work item management",
+        "env": {
+          "AZURE_DEVOPS_EXT_PAT": "63P1HhJCfzhTb6sQs1Z6M2FZTtqvVN1HRqOItDm3EvTjY36CgeQmJQQJ99BKACAAAAAD67QnAAASAZDO2YlL",
+          "AZURE_DEVOPS_ORGANIZATION": "amdaris",
+          "AZURE_DEVOPS_PROJECT": "Expense Management"
+        }
+      },
+      "memory-server": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-memory"],
+        "description": "Persistent memory server for conversation context"
+      }
+    }
+  },
+  "playwright.testDir": "./tests",
+  "playwright.use.baseURL": "https://expense-management-stage.azurewebsites.net",
+  "files.associations": {
+    "*.json": "jsonc",
+    "unified-config.json": "jsonc"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["unified-config.json"],
+      "url": "./unified-config.schema.json"
+    }
+  ]
+}
